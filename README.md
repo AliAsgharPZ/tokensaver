@@ -221,7 +221,12 @@ small file with its own tests, so it is a good first contribution.
 tokensaver catches the easy wins. If your AI bill is growing and you want a deeper review
 of prompts, model choice, caching and architecture, I can help.
 
-👉 **[Get in touch](https://github.com/behrouzbk)** <!-- TODO: swap for your booking/contact page -->
+👉 **[Get in touch](https://axieo.ca)** or email **info@axieo.ca**
+
+## Support tokensaver
+
+☕ tokensaver is free and MIT licensed. If it saves you money, you can
+[buy me a coffee](https://buymeacoffee.com/jiq8aoqxeo).
 
 ## License
 
