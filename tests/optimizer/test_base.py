@@ -39,3 +39,11 @@ def test_line_number_and_shorten() -> None:
     assert line_number("a\nb\nc", 4) == 3
     assert shorten("a   b\nc") == "a b c"
     assert shorten("x" * 100, 10) == "x" * 9 + "…"
+
+
+def test_shorten_counts_wide_characters_as_two_columns() -> None:
+    # 10 columns: 4 wide characters (8 columns) + the ellipsis
+    assert shorten("只回答与机票酒店预订相关的问题", 10) == "只回答与…"
+    assert shorten("항상 JSON 형식으로", 9) == "항상 JSO…"  # 2+2+1+1+1+1 = 8 columns + "…"
+    assert shorten("短文本", 10) == "短文本"  # 6 columns: fits, no ellipsis
+    assert shorten("Grüße — naïve", 20) == "Grüße — naïve"  # accents are 1 column

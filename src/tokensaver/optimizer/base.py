@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from collections.abc import Iterable
 from dataclasses import dataclass
 from enum import Enum
@@ -91,7 +92,20 @@ def line_number(text: str, index: int) -> int:
     return text.count("\n", 0, index) + 1
 
 
+def display_width(char: str) -> int:
+    """Terminal columns a character takes: 2 for wide CJK characters, else 1."""
+    return 2 if unicodedata.east_asian_width(char) in ("W", "F") else 1
+
+
 def shorten(text: str, limit: int = 60) -> str:
-    """One-line preview of text for reasons and titles."""
+    """One-line preview of text, at most `limit` terminal columns wide."""
     flat = " ".join(text.split())
-    return flat if len(flat) <= limit else flat[: limit - 1] + "…"
+    if sum(display_width(c) for c in flat) <= limit:
+        return flat
+    kept, used = [], 0
+    for char in flat:
+        used += display_width(char)
+        if used > limit - 1:  # leave one column for the ellipsis
+            break
+        kept.append(char)
+    return "".join(kept) + "…"

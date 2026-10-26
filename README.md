@@ -117,6 +117,72 @@ tokensaver models
 
 Windows paths work as usual: `tokensaver optimize examples\messy_prompt.txt`.
 
+## Commands and options
+
+Run `tokensaver <command> --help` for the same information in your terminal.
+
+### Input (every command)
+
+`INPUT` can be any of:
+
+| You pass | tokensaver reads |
+|---|---|
+| `prompt.txt` or `C:\prompts\system.md` | the file (UTF-8; a byte-order mark is ignored) |
+| `-` | text piped in on stdin |
+| `"Summarize this in 3 bullets."` | the text itself |
+
+A mistyped file name like `promt.txt` is an error, not silently counted as text.
+
+### `tokensaver count INPUT`
+
+Token count and input cost on one model.
+
+| Option | What it does |
+|---|---|
+| `--model`, `-m` | Model to price against. Default: `gpt-4o`. See `tokensaver models` for all names. |
+| `--prices FILE` | Use your own `prices.json` instead of the bundled one. |
+
+### `tokensaver compare INPUT`
+
+Tokens and input cost on many models, cheapest first.
+
+| Option | What it does |
+|---|---|
+| `--models a,b,c` | Only these models (comma-separated). Default: all of them. |
+| `--prices FILE` | Use your own `prices.json`. |
+
+### `tokensaver optimize INPUT`
+
+Suggestions with the tokens and dollars each one saves, a before/after diff and the
+total.
+
+| Option | What it does |
+|---|---|
+| `--model`, `-m` | Model to measure savings on. Default: `gpt-4o`. |
+| `--apply safe` | **Default.** Applies only the safe rules (`json`, `whitespace`). Review rules are listed with their savings but not applied. |
+| `--apply all` | Applies every rule. Read the suggestions first. |
+| `--apply none` | Applies nothing; just shows the suggestions. |
+| `--apply json,duplicates` | Applies only the rules you list. Names: `json`, `whitespace`, `duplicates`, `repeated-instructions`, `filler`, `long-examples`. |
+| `--output FILE`, `-o FILE` | Saves the optimized prompt to `FILE`. Without it, nothing is written. The input file is **never** overwritten. |
+| `--force` | Lets `--output` replace a file that already exists. It still refuses to overwrite the input file. |
+| `--no-diff` | Hides the before/after diff (it is shown by default). |
+| `--prices FILE` | Use your own `prices.json`. |
+
+Common combinations:
+
+```bash
+tokensaver optimize prompt.txt                                   # look first: safe fixes only, nothing saved
+tokensaver optimize prompt.txt --apply all -o prompt.min.txt     # apply everything, save a copy
+tokensaver optimize prompt.txt --apply json,whitespace,duplicates -o prompt.min.txt
+tokensaver optimize prompt.txt -m claude-sonnet-5-5 --no-diff    # savings on Claude, short output
+tokensaver optimize prompt.txt --apply all -o prompt.min.txt --force   # re-run and replace the copy
+```
+
+### `tokensaver models` and `tokensaver version`
+
+`models` lists every supported model with its prices and whether counts are exact.
+`version` prints the installed version.
+
 ## Optimizer rules
 
 Each rule is a small module in [`src/tokensaver/optimizer/`](https://github.com/behrouzbk/tokensaver/tree/main/src/tokensaver/optimizer).

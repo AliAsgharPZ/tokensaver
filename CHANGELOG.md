@@ -5,6 +5,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-10-26
+
+### Fixed
+- Suggestion previews are cut by screen width, so Chinese, Japanese and Korean text no
+  longer pushes titles onto a second line in the suggestions table.
+
+### Added
+- README: "Commands and options" guide (`--apply`, `--output`/`-o`, `--force`,
+  `--no-diff`, `--model`, `--models`, `--prices`, and input forms).
+- README: "Support tokensaver" section and a Sponsor button (`.github/FUNDING.yml`).
+
+### Changed
+- README "Work with me" links to https://axieo.ca.
+
 ## [0.1.2] - 2026-10-26
 
 ### Fixed
