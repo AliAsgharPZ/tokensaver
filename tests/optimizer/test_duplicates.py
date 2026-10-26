@@ -1,3 +1,5 @@
+import pytest
+
 from tokensaver.optimizer import duplicates
 from tokensaver.optimizer.base import Risk
 
@@ -33,6 +35,21 @@ def test_different_paragraphs_are_kept() -> None:
 def test_removes_duplicate_line_inside_paragraph(apply_rule) -> None:
     text = "Rules:\n- Never share internal data.\n- Be brief.\n- Never share internal data."
     assert apply_rule(duplicates, text) == "Rules:\n- Never share internal data.\n- Be brief."
+
+
+@pytest.mark.parametrize(
+    "rule",
+    [
+        "始终以 JSON 格式回答。",  # Chinese: 13 characters, but a real instruction
+        "항상 JSON 형식으로 답변하세요.",  # Korean
+        "常に JSON 形式で回答してください。",  # Japanese
+        "أجب دائمًا بتنسيق JSON.",  # Arabic
+        "हमेशा JSON प्रारूप में उत्तर दें।",  # Hindi
+    ],
+)
+def test_duplicate_lines_in_dense_scripts(apply_rule, rule: str) -> None:
+    text = f"{rule}\nOther line that is different.\n{rule}"
+    assert apply_rule(duplicates, text) == f"{rule}\nOther line that is different."
 
 
 def test_short_lines_are_not_duplicates() -> None:

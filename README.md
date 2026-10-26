@@ -164,6 +164,11 @@ Please read this before relying on the numbers.
   above 200K tokens on Gemini 3.1 Pro or 100K on Claude Haiku 5.5) are not included.
 - **Prices go stale.** Check the `last_updated` date in the output. Some listed prices are
   scheduled to change (see the `notes` field in `prices.json`).
+- **Languages.** Token counting and the `json`, `whitespace` and `duplicates` rules work
+  in any language and script (tested on 18, including Chinese, Arabic, Persian, Hindi,
+  Thai and Tamil). The `filler` and `repeated-instructions` rules, and "Example 1:"
+  detection, currently understand English only. Estimates for Claude and Gemini are less
+  reliable for non-English text.
 - **Message overhead is not counted.** Chat APIs add a few tokens per message for roles
   and formatting. tokensaver counts the text you give it.
 - **Rules are heuristics.** Review suggestions can be wrong: a repeated sentence can be

@@ -5,6 +5,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+- `duplicates` now finds repeated lines in Chinese, Japanese and Korean. Short lines are
+  skipped by token count instead of character count, which wrongly skipped dense scripts.
+
+### Added
+- README: a "Languages" limitation explaining which rules work in every language.
+
 ## [0.1.1] - 2026-10-26
 
 Fixes the PyPI project page (images and links); no change to how tokensaver works.

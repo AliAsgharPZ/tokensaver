@@ -110,6 +110,25 @@ def test_map_back() -> None:
     assert [map_back(p, edits) for p in positions] == [0, 2, 5, 7, 8, 8, 8, 10]
 
 
+@pytest.mark.parametrize(
+    ("language", "rule"),
+    [
+        ("Chinese", "始终以 JSON 格式回答。"),
+        ("Persian", "همیشه با قالب JSON پاسخ بده."),
+        ("Thai", "ตอบในรูปแบบ JSON เสมอ"),
+        ("Russian", "Всегда отвечай в формате JSON."),
+        ("Tamil", "எப்போதும் JSON வடிவத்தில் பதிலளிக்கவும்."),
+    ],
+)
+def test_language_independent_rules(gpt4o, language: str, rule: str) -> None:
+    pretty = '{\n    "name": "string",\n    "tags": ["a", "b"]\n}'
+    text = f"{rule}   \n\n\n\n{pretty}\n\n{rule}\n"
+    result = optimize(text, gpt4o, resolve_selection("all"))
+    rules = {f.suggestion.rule for f in result.findings}
+    assert {"json", "duplicates"} <= rules, language
+    assert result.optimized == f'{rule}\n\n{{"name":"string","tags":["a","b"]}}', language
+
+
 def test_empty_prompt(gpt4o) -> None:
     result = optimize("", gpt4o)
     assert result.tokens_before == 0

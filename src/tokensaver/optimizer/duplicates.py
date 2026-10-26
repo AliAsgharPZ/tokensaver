@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 from difflib import SequenceMatcher
 
+from tokensaver.counter import count_raw
 from tokensaver.optimizer.base import (
     Edit,
     Risk,
@@ -19,8 +20,11 @@ from tokensaver.optimizer.fewshot import protected_spans
 NAME = "duplicates"
 RISK = Risk.REVIEW
 
-MIN_CHARS = 20  # ignore short lines like "---" or "Thanks"
-NEAR_MIN_CHARS = 40
+# Lengths are measured in tokens, not characters, so dense scripts (Chinese, Korean,
+# Japanese) are treated like English: a 13-character Chinese rule is a real instruction.
+MIN_TOKENS = 5  # ignore short lines like "---" or "Thanks"
+NEAR_MIN_TOKENS = 10
+_TOKENIZER = "o200k_base"
 NEAR_RATIO = 0.9
 MAX_NEAR_COMPARISONS = 200_000
 
@@ -29,6 +33,10 @@ _PARAGRAPH_BREAK = re.compile(r"\n[ \t]*\n\s*")
 
 def _normalize(text: str) -> str:
     return " ".join(text.split()).lower()
+
+
+def _tokens(text: str) -> int:
+    return count_raw(text, _TOKENIZER)
 
 
 def _paragraph_spans(text: str) -> list[tuple[int, int]]:
@@ -54,7 +62,10 @@ def _paragraph_suggestions(text: str, fences: list[tuple[int, int]]) -> list[Sug
     comparisons = 0
     for index, (start, end) in enumerate(spans):
         norm = _normalize(text[start:end])
-        if len(norm) < MIN_CHARS or overlaps(start, end, fences):
+        if overlaps(start, end, fences):
+            continue
+        size = _tokens(norm)
+        if size < MIN_TOKENS:
             continue
 
         match_index, ratio = None, 0.0
@@ -62,7 +73,7 @@ def _paragraph_suggestions(text: str, fences: list[tuple[int, int]]) -> list[Sug
             if norm == kept_norm:
                 match_index, ratio = kept_index, 1.0
                 break
-            if len(norm) >= NEAR_MIN_CHARS and comparisons < MAX_NEAR_COMPARISONS:
+            if size >= NEAR_MIN_TOKENS and comparisons < MAX_NEAR_COMPARISONS:
                 comparisons += 1
                 score = _similarity(kept_norm, norm)
                 if score >= NEAR_RATIO and score > ratio:
@@ -102,7 +113,7 @@ def _line_suggestions(text: str, fences: list[tuple[int, int]]) -> list[Suggesti
         start, end = offset, offset + len(line)
         offset = end + 1
         norm = _normalize(line)
-        if len(norm) < MIN_CHARS or overlaps(start, end + 1, fences):
+        if not norm or overlaps(start, end + 1, fences) or _tokens(norm) < MIN_TOKENS:
             continue
         if norm not in seen:
             seen[norm] = number
