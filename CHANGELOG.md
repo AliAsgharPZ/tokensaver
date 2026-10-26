@@ -5,12 +5,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-26
+
 ### Fixed
 - `duplicates` now finds repeated lines in Chinese, Japanese and Korean. Short lines are
   skipped by token count instead of character count, which wrongly skipped dense scripts.
 
 ### Added
-- README: a "Languages" limitation explaining which rules work in every language.
+- 🌍 Multilingual support is now tested in CI: counting, `json`, `whitespace` and
+  `duplicates` on 55 languages, including right-to-left scripts and languages without
+  spaces.
+- README: "Works in every language" section with the full list.
 
 ## [0.1.1] - 2026-10-26
 

@@ -13,6 +13,27 @@ It runs 100% offline. Your prompt never leaves your machine.
 
 ![tokensaver optimize: each suggestion with its token and dollar savings, a diff, and the total](https://cdn.jsdelivr.net/gh/behrouzbk/tokensaver@main/assets/demo.svg)
 
+## 🌍 Works in every language
+
+**tokensaver works with prompts in any language and any script.** Token counting, cost
+comparison, JSON minification, whitespace cleanup and duplicate detection are
+**tested in CI on 55 languages** on every commit
+([see the test](https://github.com/behrouzbk/tokensaver/blob/main/tests/test_languages.py)):
+
+Arabic · Bengali · Bulgarian · Burmese (Myanmar) · Chinese (Simplified) · Chinese
+(Traditional, Hong Kong) · Chinese (Traditional, Macau) · Chinese (Traditional, Taiwan) ·
+Croatian · Czech · Danish · Dutch · English · Estonian · Finnish · French · German · Greek ·
+Hebrew · Hindi · Hungarian · Indonesian · Italian · Japanese · Kannada · Khmer · Korean ·
+Lithuanian · Malay · Malayalam · Marathi · Nepali · Nigerian Pidgin · Norwegian · Persian
+(Farsi) · Polish · Portuguese (Brazil) · Portuguese (Portugal) · Punjabi (Gurmukhi) ·
+Romanian · Russian · Serbian (Cyrillic) · Slovak · Slovenian · Spanish · Swahili · Swedish ·
+Tagalog (Filipino) · Tamil · Telugu · Thai · Turkish · Ukrainian · Urdu · Vietnamese
+
+Right-to-left scripts (Arabic, Hebrew, Persian, Urdu) and languages without spaces between
+words (Chinese, Japanese, Thai, Khmer, Burmese) included. The `filler` rule still speaks
+only English. **Native speakers: add your language's filler phrases in
+[#5](https://github.com/behrouzbk/tokensaver/issues/5).**
+
 ## Before / after
 
 `examples/messy_prompt.txt` is a typical customer-support system prompt: polite filler, a
@@ -165,10 +186,9 @@ Please read this before relying on the numbers.
 - **Prices go stale.** Check the `last_updated` date in the output. Some listed prices are
   scheduled to change (see the `notes` field in `prices.json`).
 - **Languages.** Token counting and the `json`, `whitespace` and `duplicates` rules work
-  in any language and script (tested on 18, including Chinese, Arabic, Persian, Hindi,
-  Thai and Tamil). The `filler` and `repeated-instructions` rules, and "Example 1:"
-  detection, currently understand English only. Estimates for Claude and Gemini are less
-  reliable for non-English text.
+  in every language (tested on 55, see above). The `filler` and `repeated-instructions`
+  rules, and "Example 1:" detection, currently understand English only. Estimates for
+  Claude and Gemini are less reliable for non-English text.
 - **Message overhead is not counted.** Chat APIs add a few tokens per message for roles
   and formatting. tokensaver counts the text you give it.
 - **Rules are heuristics.** Review suggestions can be wrong: a repeated sentence can be
