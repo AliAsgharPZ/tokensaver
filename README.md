@@ -3,14 +3,15 @@
 **Find out what your prompt costs on every major AI model, and exactly which changes make it cheaper.**
 
 [![CI](https://github.com/behrouzbk/tokensaver/actions/workflows/ci.yml/badge.svg)](https://github.com/behrouzbk/tokensaver/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/prompt-tokensaver.svg)](https://pypi.org/project/prompt-tokensaver/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/behrouzbk/tokensaver/blob/main/LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 
 Most token counters stop at a number. tokensaver tells you **what to change**: every
 suggestion comes with a reason, the tokens it saves, and what that is worth in dollars.
 It runs 100% offline. Your prompt never leaves your machine.
 
-![tokensaver optimize: each suggestion with its token and dollar savings, a diff, and the total](assets/demo.svg)
+![tokensaver optimize: each suggestion with its token and dollar savings, a diff, and the total](https://cdn.jsdelivr.net/gh/behrouzbk/tokensaver@main/assets/demo.svg)
 
 ## Before / after
 
@@ -67,12 +68,6 @@ With only the default **safe** rules (no wording changes at all), the same promp
 pip install prompt-tokensaver
 ```
 
-Not on PyPI yet? Install straight from GitHub:
-
-```bash
-pip install git+https://github.com/behrouzbk/tokensaver.git
-```
-
 The command is `tokensaver`. Requires Python 3.10 or newer. Works on Windows, macOS and
 Linux.
 
@@ -103,7 +98,7 @@ Windows paths work as usual: `tokensaver optimize examples\messy_prompt.txt`.
 
 ## Optimizer rules
 
-Each rule is a small module in [`src/tokensaver/optimizer/`](src/tokensaver/optimizer/).
+Each rule is a small module in [`src/tokensaver/optimizer/`](https://github.com/behrouzbk/tokensaver/tree/main/src/tokensaver/optimizer).
 **Safe** rules cannot change meaning and are applied by default. **Review** rules are shown
 with their savings and applied only when you ask (`--apply all` or `--apply <rule,...>`).
 Code blocks are never changed. Few-shot examples are never reworded.
@@ -125,7 +120,7 @@ line.)
 ## Supported models
 
 Prices are USD per 1M tokens, standard tier, as of **2026-10-26**. They live in
-[`src/tokensaver/data/prices.json`](src/tokensaver/data/prices.json) with a source URL for
+[`src/tokensaver/data/prices.json`](https://github.com/behrouzbk/tokensaver/blob/main/src/tokensaver/data/prices.json) with a source URL for
 each model. Edit that file, or pass your own with `--prices my_prices.json`.
 
 | Model | Provider | Input / 1M | Output / 1M | Token count |
@@ -193,7 +188,7 @@ Ideas and votes are welcome in the issues.
 ⭐ **If tokensaver saved you tokens, a star helps other developers find it.**
 
 Contributions are very welcome: new rules, better heuristics, price updates and bug
-reports. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the 5-minute setup. Each rule is one
+reports. Read [CONTRIBUTING.md](https://github.com/behrouzbk/tokensaver/blob/main/CONTRIBUTING.md) for the 5-minute setup. Each rule is one
 small file with its own tests, so it is a good first contribution.
 
 ## Need help cutting your AI costs? Work with me
@@ -205,4 +200,4 @@ of prompts, model choice, caching and architecture, I can help.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/behrouzbk/tokensaver/blob/main/LICENSE)
