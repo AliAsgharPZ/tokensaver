@@ -5,6 +5,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-10-26
+
+Documentation only; no change to how tokensaver works.
+
+### Fixed
+- README: the "Works in every language" section now says that `repeated-instructions`
+  and "Example 1:" detection are English-only, like `filler`. It previously named only
+  `filler`, which disagreed with the Limitations section.
+
 ## [0.1.3] - 2026-10-26
 
 ### Fixed
