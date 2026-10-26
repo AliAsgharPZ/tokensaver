@@ -5,6 +5,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- Demo image in the README, install-from-GitHub instructions.
+- Issue forms, pull request template, code of conduct and security policy.
+- PyPI publishing workflow (trusted publishing, no stored token).
+
+### Changed
+- CI uses `actions/checkout@v7` and `actions/setup-python@v7`.
+
 ## [0.1.0] - 2026-10-26
 
 First release, published on PyPI as `prompt-tokensaver` (command: `tokensaver`).

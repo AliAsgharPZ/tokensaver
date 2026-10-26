@@ -1,0 +1,31 @@
+name: Feature or rule idea
+description: A new optimizer rule, model, output format or command.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What costs you tokens (or time) today?
+      description: A real example helps most. Before/after text is perfect.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What should tokensaver do?
+    validations:
+      required: true
+  - type: dropdown
+    id: risk
+    attributes:
+      label: For a new rule, could it ever change the prompt's meaning?
+      options:
+        - "No: it is safe to apply by default"
+        - "Maybe: it should be a review suggestion"
+        - "Not a rule"
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Contributing
+      options:
+        - label: I would like to implement this myself (see CONTRIBUTING.md)

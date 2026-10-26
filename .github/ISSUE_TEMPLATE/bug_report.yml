@@ -1,0 +1,34 @@
+name: Bug report
+description: Something is wrong, crashes, or a count or price looks off.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please remove anything private from prompts you paste here.
+  - type: input
+    id: command
+    attributes:
+      label: Command you ran
+      placeholder: tokensaver optimize prompt.txt --model gpt-4o
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect, and what happened?
+      description: Paste the output if you can (as text, not a screenshot).
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: A small prompt that shows the problem (optional)
+      render: text
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "tokensaver 0.1.0, Python 3.12, Windows 11"
+    validations:
+      required: true

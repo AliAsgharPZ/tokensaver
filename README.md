@@ -10,6 +10,8 @@ Most token counters stop at a number. tokensaver tells you **what to change**: e
 suggestion comes with a reason, the tokens it saves, and what that is worth in dollars.
 It runs 100% offline. Your prompt never leaves your machine.
 
+![tokensaver optimize: each suggestion with its token and dollar savings, a diff, and the total](assets/demo.svg)
+
 ## Before / after
 
 `examples/messy_prompt.txt` is a typical customer-support system prompt: polite filler, a
@@ -63,6 +65,12 @@ With only the default **safe** rules (no wording changes at all), the same promp
 
 ```bash
 pip install prompt-tokensaver
+```
+
+Not on PyPI yet? Install straight from GitHub:
+
+```bash
+pip install git+https://github.com/behrouzbk/tokensaver.git
 ```
 
 The command is `tokensaver`. Requires Python 3.10 or newer. Works on Windows, macOS and
@@ -181,6 +189,8 @@ Please read this before relying on the numbers.
 Ideas and votes are welcome in the issues.
 
 ## How to contribute
+
+⭐ **If tokensaver saved you tokens, a star helps other developers find it.**
 
 Contributions are very welcome: new rules, better heuristics, price updates and bug
 reports. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the 5-minute setup. Each rule is one

@@ -87,6 +87,19 @@ Prices live in `src/tokensaver/data/prices.json`.
 - Include tests and keep `ruff` and `pytest` green.
 - Add a line under `[Unreleased]` in `CHANGELOG.md`.
 
+## Releasing (maintainer)
+
+PyPI publishing uses [trusted publishing](https://docs.pypi.org/trusted-publishers/), so
+no API token is stored.
+
+1. One time only: on pypi.org, go to *Your account → Publishing → Add a pending
+   publisher* and enter: project `prompt-tokensaver`, owner `behrouzbk`, repository
+   `tokensaver`, workflow `publish.yml`, environment `pypi`.
+2. Bump `version` in `pyproject.toml` and `src/tokensaver/__init__.py`, and move the
+   `[Unreleased]` notes in `CHANGELOG.md` under the new version.
+3. Commit, then create a GitHub Release with a `vX.Y.Z` tag. The *Publish to PyPI*
+   workflow builds and uploads the package.
+
 ## Reporting bugs
 
 Open an issue with the command you ran, what you expected and what happened. If you
