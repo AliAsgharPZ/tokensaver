@@ -5,6 +5,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-26
+
+Fixes the PyPI project page (images and links); no change to how tokensaver works.
+
 ### Added
 - Demo image and PyPI badge in the README; README links are absolute so they work on PyPI.
 - Issue forms, pull request template, code of conduct and security policy.
