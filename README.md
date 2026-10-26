@@ -30,8 +30,9 @@ Romanian · Russian · Serbian (Cyrillic) · Slovak · Slovenian · Spanish · S
 Tagalog (Filipino) · Tamil · Telugu · Thai · Turkish · Ukrainian · Urdu · Vietnamese
 
 Right-to-left scripts (Arabic, Hebrew, Persian, Urdu) and languages without spaces between
-words (Chinese, Japanese, Thai, Khmer, Burmese) included. The `filler` rule still speaks
-only English. **Native speakers: add your language's filler phrases in
+words (Chinese, Japanese, Thai, Khmer, Burmese) included. The `filler` and
+`repeated-instructions` rules, and "Example 1:" detection, still understand only English.
+**Native speakers: add your language's filler phrases in
 [#5](https://github.com/behrouzbk/tokensaver/issues/5).**
 
 ## Before / after
